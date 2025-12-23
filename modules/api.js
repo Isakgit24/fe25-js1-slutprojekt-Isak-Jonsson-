@@ -1,8 +1,8 @@
 import _ from "https://cdn.jsdelivr.net/npm/underscore@1.13.7/underscore-esm-min.js ";
 
-const top = document.querySelector('#top')
 
-const sh = document.querySelector('#sh')
+
+
 const slideDiv = document.querySelector('.mySlides, fade')
 const slideDiv2 = document.querySelector('#slide2')
 const urlpop = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1'
@@ -17,17 +17,13 @@ const optionsPop = {
   }
 };
 
-async function getPop() {
+async function imgForSlideshow() {
   try {
     const resPop = await fetch(urlpop, optionsPop)
-    const popObj = await resPop.json()
+    const popObj1 = await resPop.json()
+    const popRes = popObj1.results
 
-        if(popObj.status >= 400 && popObj.status < 500) {
-      alert('There is something wrong whith the server or the client')
-    }
-
-
-    popObj.results.slice(0, 5).forEach(pop5 => {
+    popRes.slice(0, 5).forEach(pop5 => {
 
       const img = document.createElement("img")
       img.src = imgUrl + pop5.poster_path;
@@ -38,29 +34,40 @@ async function getPop() {
 
 
     })
-
-    popObj.results.slice(5, 10).forEach(pop10 => {
+    popRes.slice(5, 10).forEach(pop10 => {
 
       const img2 = document.createElement("img")
       img2.src = imgUrl + pop10.poster_path;
       img2.alt = ' no image found';
 
       slideDiv2.appendChild(img2);
-
-
-
     })
 
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function getPop() {
+  try {
+    const resPop = await fetch(urlpop, optionsPop)
+    const popObj = await resPop.json()
+
+    if (popObj.status >= 400 && popObj.status < 500) {
+      alert('There is something wrong whith the server or the client')
+    }
 
     for (let i = 0; i < 10; i++) {
       const h1 = document.createElement('h1')
       const img = document.createElement('img')
       const p = document.createElement('p')
+      const poster = popObj.results[i].poster_path
       h1.innerText = popObj.results[i].title
       p.innerText = popObj.results[i].release_date
-
-      pop.appendChild(h1)
-      pop.appendChild(p)
+      img.src = `https://image.tmdb.org/t/p/w200${poster}`
+      popOrTop.appendChild(h1)
+      popOrTop.appendChild(p)
+      popOrTop.appendChild(img)
 
     }
 
@@ -88,7 +95,7 @@ async function getTop() {
     const responseTop = await fetch(urlTop, optionsTop)
     const topObj = await responseTop.json()
 
-         if(topObj.status >= 400 && topObj.status < 500) {
+    if (topObj.status >= 400 && topObj.status < 500) {
       alert('There is something wrong whith the server or the client')
     }
 
@@ -102,9 +109,9 @@ async function getTop() {
       h1.innerText = topObj.results[i].title
       img.src = `https://image.tmdb.org/t/p/w200${poster}`
       p.innerText = topObj.results[i].release_date
-      top.appendChild(h1)
-      top.appendChild(img)
-      top.appendChild(p)
+      popOrTop.appendChild(h1)
+      popOrTop.appendChild(img)
+      popOrTop.appendChild(p)
 
     }
 
@@ -131,7 +138,7 @@ async function search(searchRes) {
     const responseSh = await fetch(urlSh, options)
     const shObj = await responseSh.json()
 
-    if(shObj.status >= 400 && shObj.status < 500) {
+    if (shObj.status >= 400 && shObj.status < 500) {
       alert('There is something wrong whith the server or the client')
     }
 
@@ -151,7 +158,7 @@ async function search(searchRes) {
     console.log(movieArr)
 
 
-      if (searchRes !== personArr || movieArr) {
+    if (movieArr.length === 0 || personArr.length === 0) {
       const p = document.createElement('p')
 
       p.innerText = 'The movie or person you search for could not be found, check spelling'
@@ -170,10 +177,12 @@ async function search(searchRes) {
       const name_title = person.name
       const poster = person.profile_path
       const famouseFor = person.known_for_department
+      const itsAPerson = person.media_type
+      console.log(person.media_type)
 
 
 
-      h1.innerText = name_title
+      h1.innerText = `${itsAPerson}:  ${name_title}`
       img.src = `https://image.tmdb.org/t/p/w200${poster}`
       img.alt = ' no image found'
       p.innerText = famouseFor
@@ -210,8 +219,11 @@ async function search(searchRes) {
       const poster = movieArr[i].poster_path
       const release_date = movieArr[i].release_date
       const overview = movieArr[i].overview
+      const itsAMovie = movieArr[i].media_type
+      console.log(itsAMovie)
+      console.log(movieArr[i])
 
-      h1.innerText = name_title
+      h1.innerText = `${itsAMovie}:  ${name_title}`
       img.src = `https://image.tmdb.org/t/p/w200${poster}`
       img.alt = ' no image found'
       p.innerText = release_date || 'unknown relase date'
@@ -237,4 +249,4 @@ async function search(searchRes) {
 
 
 
-export { getPop, getTop, search };
+export { getPop, getTop, search, imgForSlideshow };
