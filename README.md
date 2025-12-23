@@ -2,6 +2,7 @@
 Isak-Jonsson-SlutPr0ject
 
 What the project does
+
 This project shows you the top rated and most popular movies and lets you search for movies and People.
 
 Why the project is useful
