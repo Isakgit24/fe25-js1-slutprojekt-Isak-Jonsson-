@@ -4,29 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Movies</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
+<nav>
 <form id="nameForm">
     <label for="Search"></label>
     <input type="text" id="Search" name="Search" />
     <button type="submit">Search</button>
 </form>
+   <button id="topBtn">TopBtn</button>
+   <button id="PopBtn">PopBtn</button>
+</nav>
+
+<!-- här kommmer alla söknigar-->
+<div id="sh" >
+    <div ></div>
+</div>
 
 <!-- Slideshow container -->
 <div class="slideshow-container">
 
-    <!-- Full-width images with number and caption text -->
+ 
     <div class="mySlides fade">
      <div class="numbertext">1 / 2</div>
-        <div class="text"> The 10 most popular Movies right now Nr 1-5. Check below for Title and Relaese date</div>
+        <div class="text"> The 10 most popular Movies right now Nr 1-5, , Click  Pop button above</div>
     </div>
 
     <div id="slide2" class="mySlides fade">
        <div class="numbertext">2 / 2</div>
 
-        <div class="text">The 10 most popular Movies right now Nr 5-10 Check below for Title and Relaese date</div>
+        <div class="text">The 10 most popular Movies right now Nr 5-10, Click Pop button above</div>
     </div>
 
 
@@ -37,19 +45,14 @@
 <br>
 
 
-
-<div id="pop">
-    <h1>Populer Movies</h1>
+<!--här kommer top rated och most popular-->
+<div id="popOrTop">
+    
 </div>
 
-<div id="top">
-    <h1 id="topH1">Top Rated Movies</h1>
-     <button id="topBtn">TopBtn</button>
-</div>
 
-<div id="sh" >
-    <div id="scroll" ></div>
-</div>
+
+
 
 
 <script src="./modules/main.js" type="module"></script>
