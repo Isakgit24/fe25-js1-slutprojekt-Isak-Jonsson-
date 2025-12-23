@@ -13,4 +13,5 @@ How users can get started with the project
 You can get started by pressing the arrows on the slideShow to see the most popular movies right now. the you can press the TopBtn and get the top rated movies, you can also press the popBtn to get most popular movies right now. the user can also write a person or movie in the search bar and press enter or press the search button.
 
 Who maintains and contributes to the project
+
 Isak Jönsson
