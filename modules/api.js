@@ -158,7 +158,7 @@ async function search(searchRes) {
     console.log(movieArr)
 
 
-    if (movieArr.length === 0 || personArr.length === 0) {
+    if (movieArr.length === 0 && personArr.length === 0) {
       const p = document.createElement('p')
 
       p.innerText = 'The movie or person you search for could not be found, check spelling'
