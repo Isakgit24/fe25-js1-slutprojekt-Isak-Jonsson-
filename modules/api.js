@@ -20,6 +20,9 @@ const optionsPop = {
 async function imgForSlideshow() {
   try {
     const resPop = await fetch(urlpop, optionsPop)
+            if (!resPop.ok) {
+      throw 'Somethingwent wrong'
+    }
     const popObj1 = await resPop.json()
     const popRes = popObj1.results
 
@@ -45,17 +48,21 @@ async function imgForSlideshow() {
 
   } catch (err) {
     console.log(err)
+    alert('There is something wrong whith the server,the client or the network')
+
   }
 }
 
 async function getPop() {
   try {
     const resPop = await fetch(urlpop, optionsPop)
+    console.log(resPop.ok)
+    if (!resPop.ok) {
+      throw 'Somethingwent wrong'
+    }
     const popObj = await resPop.json()
 
-    if (popObj.status >= 400 && popObj.status < 500) {
-      alert('There is something wrong whith the server or the client')
-    }
+
 
     for (let i = 0; i < 10; i++) {
       const h1 = document.createElement('h1')
@@ -75,6 +82,8 @@ async function getPop() {
 
   } catch (err) {
     console.log(err)
+    alert('There is something wrong whith the server,the client or the network')
+
   }
 
 }
@@ -92,12 +101,14 @@ const optionsTop = {
 
 async function getTop() {
   try {
-    const responseTop = await fetch(urlTop, optionsTop)
-    const topObj = await responseTop.json()
-
-    if (topObj.status >= 400 && topObj.status < 500) {
-      alert('There is something wrong whith the server or the client')
+    const resTop = await fetch(urlTop, optionsTop)
+         if (!resTop.ok) {
+      throw 'Somethingwent wrong'
     }
+
+    const topObj = await resTop.json()
+
+ 
 
     for (let i = 0; i < 10; i++) {
       const h1 = document.createElement('h1')
@@ -119,6 +130,7 @@ async function getTop() {
 
   } catch (err) {
     console.log(err)
+    alert('There is something wrong whith the server,the client or the network')
   }
 
 }
@@ -135,12 +147,13 @@ async function search(searchRes) {
   console.log(searchRes)
   const urlSh = `https://api.themoviedb.org/3/search/multi?query=${searchRes}&language=en-US&page=1`
   try {
-    const responseSh = await fetch(urlSh, options)
-    const shObj = await responseSh.json()
-
-    if (shObj.status >= 400 && shObj.status < 500) {
-      alert('There is something wrong whith the server or the client')
+    const resSh = await fetch(urlSh, options)
+            if (!resSh.ok) {
+      throw 'Somethingwent wrong'
     }
+    const shObj = await resSh.json()
+
+
 
     const resultArr = shObj.results
     console.log(shObj)
@@ -242,6 +255,7 @@ async function search(searchRes) {
 
   } catch (err) {
     console.error(err)
+    alert('There is something wrong whith the server,the client or the network')
   }
 }
 
